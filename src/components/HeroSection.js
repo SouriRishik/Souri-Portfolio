@@ -127,11 +127,12 @@ export default function HeroSection() {
             }}
             className="btn-primary inline-block"
           >
-            View Projects →
+            View Projects
           </a>
           <a
             href="/SouriRishik_Resume.pdf"
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-outline inline-block"
           >
             Download Resume
