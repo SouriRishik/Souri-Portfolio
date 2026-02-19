@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="en" data-theme="dark">
       <Head>
-        <link rel="icon" href="/logos/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
