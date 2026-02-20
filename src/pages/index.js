@@ -90,7 +90,7 @@ const experiences = [
 const projects = [
   {
     title: 'Sign Language Gesture Analysis',
-    image: '',
+    image: '/images/sign.png',
     description:
       'Built a lightweight custom CNN (~227K parameters) to classify 24 static ASL hand gestures from the Sign Language MNIST dataset. Achieved 99.69% validation accuracy and demonstrated real-time webcam inference, correctly recognizing 20/24 gestures under live conditions.',
     tags: ['Python', 'TensorFlow', 'Keras', 'OpenCV', 'NumPy'],
@@ -98,7 +98,7 @@ const projects = [
   },
   {
     title: 'Phishing URL Detection',
-    image: '',
+    image: '/images/phishing.png',
     description:
       'Engineered multiple ML models (Gradient Boosting, CatBoost, XGBoost, Random Forest) to detect phishing URLs, achieving 97.4% accuracy and 97.7% F1-score on 30,000+ samples. Deployed a real-time Python web application reducing manual verification by 70%.',
     tags: ['Python', 'XGBoost', 'CatBoost', 'Machine Learning'],
@@ -106,7 +106,7 @@ const projects = [
   },
   {
     title: 'Digit Recognition',
-    image: '',
+    image: '/images/digit.png',
     description:
       'Developed a Feedforward Neural Network in TensorFlow/Keras with preprocessing, batch normalization, dropout, and L2 regularization for MNIST digit recognition. Achieved 98.13% classification accuracy.',
     tags: ['Python', 'TensorFlow', 'Keras', 'NumPy', 'Pandas'],
@@ -114,7 +114,7 @@ const projects = [
   },
   {
     title: 'Fastest Line Follower',
-    image: '',
+    image: '/images/linefollower.jpeg',
     description:
       'Optimized PID algorithm with manual, Ziegler\u2013Nichols, and incremental tuning, improving motor precision by 30%. Created a Bluetooth-based Python GUI for real-time PID tuning, cutting adjustment time by 50%. Competed at Technoxian 8.0, advancing to quarterfinals among 200+ teams.',
     tags: ['C', 'Python', 'STM32CubeIDE', 'PID', 'Embedded'],
@@ -122,7 +122,7 @@ const projects = [
   },
   {
     title: 'Autonav (RoboCUP@Work)',
-    image: '',
+    image: '/images/autonav.jpg',
     description:
       'Programmed a 6-DOF Mecanum robot for RoboCUP@Work with 2D LiDAR and depth camera, using SLAM Toolbox and NAV2 for mapping and navigation. Achieved <10cm localization error and 92% goal success in ROS2.',
     tags: ['ROS2', 'SLAM', 'LiDAR', 'NAV2', 'Robotics'],
@@ -130,7 +130,7 @@ const projects = [
   },
   {
     title: 'Open Volley',
-    image: '',
+    image: '/images/openvolley.png',
     description:
       'Built a computer vision system in Python/OpenCV to track volleyball trajectories with 95% detection accuracy, processing 120+ frames per second for real-time analysis. Automated ball tracking and player count per team, reducing manual annotation time by 60%.',
     tags: ['Python', 'OpenCV', 'Computer Vision'],
@@ -506,7 +506,7 @@ export default function Home() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover rounded-lg mb-4"
+                    style={{ width: '100%', height: '260px', objectFit: 'contain', borderRadius: '1.5rem', marginBottom: '1rem', display: 'block', background: 'var(--bg-secondary)' }}
                   />
                 ) : (
                   <div
