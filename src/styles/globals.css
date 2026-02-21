@@ -173,6 +173,8 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  min-width: 240px;
+  width: 240px;
 }
 
 .btn-primary::before {
@@ -202,6 +204,8 @@ body {
   font-weight: 600;
   transition: all 0.3s ease;
   background: transparent;
+  min-width: 240px;
+  width: 240px;
 }
 
 .btn-outline:hover {
