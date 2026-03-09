@@ -4,6 +4,8 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import ScrollToTop from "@/components/ScrollToTop";
+import MouseGlow from "@/components/MouseGlow";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -20,6 +22,8 @@ export default function App({ Component, pageProps }) {
         >
           <Component {...pageProps} />
           <SpeedInsights />
+          <MouseGlow />
+          <ScrollToTop />
         </motion.div>
       </AnimatePresence>
     </ThemeProvider>
