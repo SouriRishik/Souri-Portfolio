@@ -29,7 +29,7 @@ export default function Footer() {
     >
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-[5fr_1fr_1fr] gap-10">
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="text-xl font-bold gradient-text mb-3">&lt;/Souri&gt;</h3>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               Data Science Engineering student passionate about building intelligent systems and solving real-world problems through code.
@@ -37,6 +37,7 @@ export default function Footer() {
             </p>
           </div>
 
+          <div className="grid grid-cols-2 gap-6 md:contents">
           <div>
             <h4 className="font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
               Quick Links
@@ -115,6 +116,7 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+          </div>
           </div>
         </div>
 
