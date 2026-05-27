@@ -4,6 +4,11 @@ import HeroSection from '@/components/HeroSection';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
+import BlurText from '@/components/effects/BlurText';
+import SpotlightCard from '@/components/effects/SpotlightCard';
+import TiltCard from '@/components/effects/TiltCard';
+import StarBorder from '@/components/effects/StarBorder';
+import FlipCard from '@/components/effects/FlipCard';
 
 const skillsRow1 = [
   { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
@@ -36,12 +41,48 @@ const skillsRow2 = [
 
 
 const certifications = [
-  'Generative AI with Large Language Models',
-  'Natural Language Processing in TensorFlow',
-  'MongoDB: The Complete Guide to NoSQL Database Development',
-  'C++ Data Structures in the STL',
-  'Build Your First GUI App With Java',
-  'Introduction to Java Programming: Java Fundamental Concepts',
+  {
+    title: 'Generative AI with Large Language Models',
+    issuer: 'DEEPLEARNING.AI · COURSERA',
+    description: 'A comprehensive deep dive into the generative AI lifecycle. Covers transformer architecture, LLM training, fine-tuning, and deployment.',
+    image: 'https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~EW0GN1TQR63F/CERTIFICATE_LANDING_PAGE~EW0GN1TQR63F.jpeg',
+    verifyLink: 'https://www.coursera.org/account/accomplishments/verify/EW0GN1TQR63F',
+  },
+  {
+    title: 'Natural Language Processing in TensorFlow',
+    issuer: 'DEEPLEARNING.AI · COURSERA',
+    description: 'Explores advanced NLP techniques including tokenization, sentiment analysis, word embeddings, RNNs, and LSTMs using TensorFlow.',
+    image: 'https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~TJ6G1IAQFMF0/CERTIFICATE_LANDING_PAGE~TJ6G1IAQFMF0.jpeg',
+    verifyLink: 'https://www.coursera.org/account/accomplishments/verify/TJ6G1IAQFMF0',
+  },
+  {
+    title: 'MongoDB: The Complete Guide to NoSQL Database Development',
+    issuer: 'COURSERA',
+    description: 'Master MongoDB NoSQL database development, covering CRUD operations, indexing, aggregation framework, and data modeling.',
+    image: 'https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~810F9ULM5FUB/CERTIFICATE_LANDING_PAGE~810F9ULM5FUB.jpeg',
+    verifyLink: 'https://www.coursera.org/account/accomplishments/verify/810F9ULM5FUB',
+  },
+  {
+    title: 'C++ Data Structures in the STL',
+    issuer: 'COURSERA',
+    description: 'An in-depth exploration of C++ Standard Template Library, focusing on vectors, maps, sets, and efficient algorithmic implementations.',
+    image: 'https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~N3T1VU9RRU3F/CERTIFICATE_LANDING_PAGE~N3T1VU9RRU3F.jpeg',
+    verifyLink: 'https://www.coursera.org/account/accomplishments/verify/N3T1VU9RRU3F',
+  },
+  {
+    title: 'Build Your First GUI App With Java',
+    issuer: 'COURSERA PROJECT NETWORK',
+    description: 'Hands-on project developing a graphical user interface application using Java Swing and basic event-driven programming.',
+    image: 'https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~62HTR5A2I5G6/CERTIFICATE_LANDING_PAGE~62HTR5A2I5G6.jpeg',
+    verifyLink: 'https://www.coursera.org/account/accomplishments/verify/62HTR5A2I5G6',
+  },
+  {
+    title: 'Introduction to Java Programming: Java Fundamental Concepts',
+    issuer: 'COURSERA',
+    description: 'Foundational concepts of Java programming including object-oriented design, syntax, control structures, and basic data types.',
+    image: 'https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~O902CZA2WN7Y/CERTIFICATE_LANDING_PAGE~O902CZA2WN7Y.jpeg',
+    verifyLink: 'https://www.coursera.org/account/accomplishments/verify/O902CZA2WN7Y',
+  },
 ];
 
 const education = [
@@ -56,14 +97,14 @@ const education = [
     institution: 'Mahatma Gandhi Memorial PU College, Udupi',
     duration: 'Jul 2021 — Apr 2023',
     degree: 'Higher Secondary Education (PCMC) — Karnataka State Board',
-    detail: 'Percentage: 94.3%',
+    detail: '',
     logo: '/logos/mgm.png',
   },
   {
     institution: 'Little Rock Indian School, Brahmavar',
     duration: 'Mar 2021',
     degree: 'CBSE 10th Board',
-    detail: 'Percentage: 91.6%',
+    detail: '',
     logo: '/logos/lris.jpeg',
   },
 ];
@@ -264,6 +305,7 @@ export default function Home() {
       <main>
         <HeroSection />
 
+        {/* ==================== ABOUT SECTION ==================== */}
         <section id="about" className="section relative z-10 pt-28">
           <div className="blob blob-1" />
           <div className="blob blob-2" />
@@ -277,7 +319,10 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="section-title">
-              About <span className="gradient-text">Me</span>
+              <BlurText delay={0}>About </BlurText>
+              <span className="gradient-text">
+                <BlurText delay={0.2}>Me</BlurText>
+              </span>
             </h2>
             <p className="section-subtitle mx-auto">
               A curious mind at the intersection of data science, robotics, and software engineering —
@@ -285,7 +330,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          
+          {/* ===== EDUCATION ===== */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -294,9 +339,9 @@ export default function Home() {
             className="mb-16"
           >
             <h3 className="text-2xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-              Education
+              <BlurText>Education</BlurText>
             </h3>
-            <div className="ml-4">
+            <div className="ml-2 sm:ml-4">
               {education.map((edu, i) => (
                 <motion.div
                   key={i}
@@ -307,12 +352,12 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="timeline-item"
                 >
-                  <div className="card">
-                    <div className="flex items-start gap-4">
+                  <TiltCard className="card" maxTilt={8} glareMaxOpacity={0.1}>
+                    <div className="flex items-start gap-3 sm:gap-4">
                       <img
                         src={edu.logo}
                         alt={edu.institution}
-                        className="w-14 h-14 rounded-xl object-contain shrink-0"
+                        className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl object-contain shrink-0"
                         style={edu.logo === '/logos/mgm.png' ? { background: 'white', padding: '4px' } : {}}
                       />
                       <div className="flex-1 min-w-0">
@@ -328,13 +373,13 @@ export default function Home() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </TiltCard>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          
+          {/* ===== EXPERIENCE ===== */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -343,9 +388,9 @@ export default function Home() {
             className="mb-16"
           >
             <h3 className="text-2xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-              Experience
+              <BlurText>Experience</BlurText>
             </h3>
-            <div className="ml-4">
+            <div className="ml-2 sm:ml-4">
               {experiences.map((exp, i) => (
                 <motion.div
                   key={i}
@@ -356,12 +401,12 @@ export default function Home() {
                   viewport={{ once: true }}
                   className="timeline-item"
                 >
-                  <div className="card">
-                    <div className="flex items-start gap-4">
+                  <TiltCard className="card" maxTilt={8} glareMaxOpacity={0.1}>
+                    <div className="flex items-start gap-3 sm:gap-4">
                       <img
                         src={exp.logo}
                         alt={exp.org}
-                        className="w-14 h-14 rounded-xl object-contain shrink-0"
+                        className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl object-contain shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
@@ -378,13 +423,13 @@ export default function Home() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </TiltCard>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          
+          {/* ===== SKILLS ===== */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -392,7 +437,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <h3 className="text-2xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-              Skills & Technologies
+              <BlurText>Skills & Technologies</BlurText>
             </h3>
             <div className="marquee-wrapper">
               <div className="marquee-row marquee-row-left">
@@ -431,7 +476,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          
+          {/* ===== CERTIFICATIONS ===== */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -440,34 +485,29 @@ export default function Home() {
             className="mt-16"
           >
             <h3 className="text-2xl font-bold mb-8" style={{ color: 'var(--text-primary)' }}>
-              Certifications
+              <BlurText>Certifications</BlurText>
             </h3>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {certifications.map((cert, i) => (
                 <motion.div
-                  key={cert}
+                  key={cert.title}
                   custom={i}
                   variants={fadeInUp}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="card flex items-center gap-3"
                 >
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                    style={{ background: 'var(--accent-light)', color: 'var(--accent)' }}
-                  >
-                    ✓
-                  </div>
-                  <p className="font-medium text-sm" style={{ color: 'var(--text-primary)' }}>
-                    {cert}
-                  </p>
+                  <FlipCard cert={cert} />
                 </motion.div>
               ))}
             </div>
           </motion.div>
+
+          {/* Section divider */}
+          <div className="section-divider mt-16" />
         </section>
 
+        {/* ==================== PROJECTS SECTION ==================== */}
         <section id="projects" className="section relative z-10 pt-28">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -477,7 +517,10 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="section-title">
-              My <span className="gradient-text">Projects</span>
+              <BlurText delay={0}>My </BlurText>
+              <span className="gradient-text">
+                <BlurText delay={0.15}>Projects</BlurText>
+              </span>
             </h2>
             <p className="section-subtitle mx-auto">
               A collection of projects spanning robotics, AI, computer vision, and web development.
@@ -496,81 +539,90 @@ export default function Home() {
               <motion.div
                 key={project.title}
                 variants={cardVariants}
-                whileHover={{ y: -6 }}
-                className="card relative overflow-hidden group flex flex-col"
-                style={{
-                  background: 'var(--gradient-card)',
-                  borderColor: 'var(--border-hover)',
-                }}
               >
-                {project.image ? (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    style={{ width: '100%', height: '260px', objectFit: 'contain', borderRadius: '1.5rem', marginBottom: '1rem', display: 'block', background: 'var(--bg-secondary)' }}
-                  />
-                ) : (
-                  <div
-                    className="w-full h-48 rounded-lg mb-4 flex items-center justify-center"
-                    style={{ background: 'var(--bg-secondary)', border: '2px dashed var(--border)' }}
+                <SpotlightCard
+                  className="relative overflow-hidden group flex flex-col h-full"
+                  spotlightColor="rgba(129, 140, 248, 0.12)"
+                  spotlightSize={400}
+                  whileHover={{ y: -6 }}
+                  style={{
+                    background: 'var(--gradient-card)',
+                    borderColor: 'var(--border-hover)',
+                  }}
+                >
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      style={{ width: '100%', height: '260px', objectFit: 'contain', borderRadius: '1.25rem', marginBottom: '1rem', display: 'block', background: 'var(--bg-secondary)' }}
+                    />
+                  ) : (
+                    <div
+                      className="w-full h-48 rounded-lg mb-4 flex items-center justify-center"
+                      style={{ background: 'var(--bg-secondary)', border: '2px dashed var(--border)' }}
+                    >
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)' }}>
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                      </svg>
+                    </div>
+                  )}
+
+                  <h3
+                    className="text-xl font-bold mb-3"
+                    style={{ color: 'var(--text-primary)' }}
                   >
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted)' }}>
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                      <circle cx="8.5" cy="8.5" r="1.5" />
-                      <polyline points="21 15 16 10 5 21" />
-                    </svg>
+                    {project.title}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed mb-4 flex-grow"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-5 mt-auto">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="tech-tag">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                )}
 
-                <h3
-                  className="text-xl font-bold mb-3"
-                  style={{ color: 'var(--text-primary)' }}
-                >
-                  {project.title}
-                </h3>
-                <p
-                  className="text-sm leading-relaxed mb-4 flex-grow"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-5 mt-auto">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="tech-tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
-                  style={{ color: 'var(--accent)' }}
-                >
-                  View on GitHub
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="group-hover:translate-x-1 transition-transform"
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
+                    style={{ color: 'var(--accent)' }}
                   >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </a>
+                    View on GitHub
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="group-hover:translate-x-1 transition-transform"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </a>
+                </SpotlightCard>
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Section divider */}
+          <div className="section-divider mt-16" />
         </section>
 
+        {/* ==================== CONTACT SECTION ==================== */}
         <section id="contact" className="section relative z-10 pt-28">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -580,7 +632,10 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="section-title">
-              Get In <span className="gradient-text">Touch</span>
+              <BlurText delay={0}>Get In </BlurText>
+              <span className="gradient-text">
+                <BlurText delay={0.15}>Touch</BlurText>
+              </span>
             </h2>
             <p className="section-subtitle mx-auto">
               Have a question, want to collaborate, or just want to say hi?
@@ -606,27 +661,31 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  whileHover={{ x: 4 }}
-                  className="card flex items-center gap-4 cursor-pointer"
-                  style={{ display: 'flex' }}
                 >
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                    style={{
-                      background: 'var(--accent-light)',
-                      color: 'var(--accent)',
-                    }}
+                  <TiltCard
+                    className="card flex items-center gap-4 cursor-pointer mb-4"
+                    maxTilt={10}
+                    glareMaxOpacity={0.12}
+                    style={{ display: 'flex' }}
                   >
-                    {info.icon}
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
-                      {info.label}
-                    </p>
-                    <p className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>
-                      {info.value}
-                    </p>
-                  </div>
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                      style={{
+                        background: 'var(--accent-light)',
+                        color: 'var(--accent)',
+                      }}
+                    >
+                      {info.icon}
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+                        {info.label}
+                      </p>
+                      <p className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>
+                        {info.value}
+                      </p>
+                    </div>
+                  </TiltCard>
                 </motion.a>
               ))}
 
@@ -650,116 +709,118 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="lg:col-span-3"
             >
-              <div className="card">
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-2"
-                      style={{ color: 'var(--text-secondary)' }}
-                    >
-                      Your Name
-                    </label>
-                    <input
-                      name="name"
-                      type="text"
-                      placeholder="Enter your name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="input-field"
-                      required
-                    />
-                  </div>
+              <StarBorder color="rgba(129, 140, 248, 0.4)" speed="8s" style={{ display: 'block', borderRadius: '22px' }}>
+                <div className="card" style={{ border: 'none', borderRadius: '20px' }}>
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                      <label
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        Your Name
+                      </label>
+                      <input
+                        name="name"
+                        type="text"
+                        placeholder="Enter your name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="input-field"
+                        required
+                      />
+                    </div>
 
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-2"
-                      style={{ color: 'var(--text-secondary)' }}
+                    <div>
+                      <label
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        Email Address
+                      </label>
+                      <input
+                        name="email"
+                        type="email"
+                        placeholder="Enter your email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="input-field"
+                        style={emailError ? { borderColor: '#ef4444' } : {}}
+                        required
+                      />
+                      {emailError && (
+                        <p className="text-xs mt-1" style={{ color: '#ef4444' }}>
+                          {emailError}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label
+                        className="block text-sm font-medium mb-2"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        Message
+                      </label>
+                      <textarea
+                        name="message"
+                        placeholder="Enter your message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        className="input-field"
+                        style={{ minHeight: '140px', resize: 'vertical' }}
+                        required
+                      />
+                    </div>
+
+                    <motion.button
+                      type="submit"
+                      disabled={sending || status === 'success'}
+                      whileHover={{ scale: status === 'success' ? 1 : 1.02 }}
+                      whileTap={{ scale: status === 'success' ? 1 : 0.98 }}
+                      className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold transition-all duration-300
+                        ${status === 'success' ? 'bg-green-600 text-white cursor-default' : 'btn-primary'}
+                        ${sending ? 'opacity-70 cursor-not-allowed' : ''}`}
+                      style={{ minHeight: '48px' }}
                     >
-                      Email Address
-                    </label>
-                    <input
-                      name="email"
-                      type="email"
-                      placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="input-field"
-                      style={emailError ? { borderColor: '#ef4444' } : {}}
-                      required
-                    />
-                    {emailError && (
-                      <p className="text-xs mt-1" style={{ color: '#ef4444' }}>
-                        {emailError}
-                      </p>
+                      {sending ? (
+                        <span className="flex items-center gap-2">
+                          <span className="dot-flashing"></span>
+                          Sending...
+                        </span>
+                      ) : status === 'success' ? (
+                        <span className="flex items-center gap-2">
+                          <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                          Message Sent!
+                        </span>
+                      ) : (
+                        <>
+                          Send Message
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                          </svg>
+                        </>
+                      )}
+                    </motion.button>
+
+                    {status === 'error' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        className="flex items-center gap-2 text-sm font-medium px-4 py-3 rounded-xl mt-2"
+                        style={{
+                          background: 'rgba(239, 68, 68, 0.1)',
+                          color: '#ef4444',
+                          border: '1px solid rgba(239, 68, 68, 0.2)',
+                        }}
+                      >
+                        ✕ Something went wrong. Please try again or email me directly.
+                      </motion.div>
                     )}
-                  </div>
-
-                  <div>
-                    <label
-                      className="block text-sm font-medium mb-2"
-                      style={{ color: 'var(--text-secondary)' }}
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      name="message"
-                      placeholder="Enter your message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="input-field"
-                      style={{ minHeight: '140px', resize: 'vertical' }}
-                      required
-                    />
-                  </div>
-
-                  <motion.button
-                    type="submit"
-                    disabled={sending || status === 'success'}
-                    whileHover={{ scale: status === 'success' ? 1 : 1.02 }}
-                    whileTap={{ scale: status === 'success' ? 1 : 0.98 }}
-                    className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold transition-all duration-300
-                      ${status === 'success' ? 'bg-green-600 text-white cursor-default' : 'btn-primary'}
-                      ${sending ? 'opacity-70 cursor-not-allowed' : ''}`}
-                    style={{ minHeight: '48px' }}
-                  >
-                    {sending ? (
-                      <span className="flex items-center gap-2">
-                        <span className="dot-flashing"></span>
-                        Sending...
-                      </span>
-                    ) : status === 'success' ? (
-                      <span className="flex items-center gap-2">
-                        <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                        Message Sent!
-                      </span>
-                    ) : (
-                      <>
-                        Send Message
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="22" y1="2" x2="11" y2="13" />
-                          <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                        </svg>
-                      </>
-                    )}
-                  </motion.button>
-
-                  {status === 'error' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="flex items-center gap-2 text-sm font-medium px-4 py-3 rounded-xl mt-2"
-                      style={{
-                        background: 'rgba(239, 68, 68, 0.1)',
-                        color: '#ef4444',
-                        border: '1px solid rgba(239, 68, 68, 0.2)',
-                      }}
-                    >
-                      ✕ Something went wrong. Please try again or email me directly.
-                    </motion.div>
-                  )}
-                </form>
-              </div>
+                  </form>
+                </div>
+              </StarBorder>
             </motion.div>
           </div>
         </section>
