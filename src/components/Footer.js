@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 const footerLinks = [
   { label: 'Home', href: '#hero' },
@@ -21,7 +20,7 @@ const scrollTo = (e, href) => {
 export default function Footer() {
   return (
     <footer
-      className="relative mt-20"
+      className="relative mt-20 footer-gradient-border"
       style={{
         borderTop: '1px solid var(--border)',
         background: 'var(--bg-secondary)',
@@ -30,7 +29,13 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-[5fr_1fr_1fr] gap-10">
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-bold gradient-text mb-3">&lt;/Souri&gt;</h3>
+            <motion.h3
+              className="text-xl font-bold gradient-text mb-3"
+              whileHover={{ scale: 1.03 }}
+              style={{ display: 'inline-block' }}
+            >
+              &lt;/Souri&gt;
+            </motion.h3>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               Data Science Engineering student passionate about building intelligent systems and solving real-world problems through code.
               Enthusiastic about technology, creativity, and making a positive impact.
@@ -48,10 +53,8 @@ export default function Footer() {
                   <a
                     href={link.href}
                     onClick={(e) => scrollTo(e, link.href)}
-                    className="text-sm transition-colors hover:translate-x-1 inline-block"
+                    className="footer-link text-sm"
                     style={{ color: 'var(--text-secondary)' }}
-                    onMouseEnter={(e) => (e.target.style.color = 'var(--accent)')}
-                    onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
                   >
                     {link.label}
                   </a>
@@ -70,10 +73,8 @@ export default function Footer() {
                   href="https://github.com/SouriRishik"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm transition-colors hover:translate-x-1 inline-block"
+                  className="footer-link text-sm"
                   style={{ color: 'var(--text-secondary)' }}
-                  onMouseEnter={(e) => (e.target.style.color = 'var(--accent)')}
-                  onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
                 >
                   GitHub
                 </a>
@@ -83,10 +84,8 @@ export default function Footer() {
                   href="https://linkedin.com/in/souri-rishik-02a188284"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm transition-colors hover:translate-x-1 inline-block"
+                  className="footer-link text-sm"
                   style={{ color: 'var(--text-secondary)' }}
-                  onMouseEnter={(e) => (e.target.style.color = 'var(--accent)')}
-                  onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
                 >
                   LinkedIn
                 </a>
@@ -94,10 +93,8 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:souri.rishik27@gmail.com"
-                  className="text-sm transition-colors hover:translate-x-1 inline-block"
+                  className="footer-link text-sm"
                   style={{ color: 'var(--text-secondary)' }}
-                  onMouseEnter={(e) => (e.target.style.color = 'var(--accent)')}
-                  onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
                 >
                   Email
                 </a>
@@ -107,10 +104,8 @@ export default function Footer() {
                   href="https://instagram.com/souri.rishik"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm transition-colors hover:translate-x-1 inline-block"
+                  className="footer-link text-sm"
                   style={{ color: 'var(--text-secondary)' }}
-                  onMouseEnter={(e) => (e.target.style.color = 'var(--accent)')}
-                  onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
                 >
                   Instagram
                 </a>

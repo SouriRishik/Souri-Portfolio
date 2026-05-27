@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/context/ThemeContext';
@@ -12,7 +10,6 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -73,23 +70,50 @@ export default function Navbar() {
             </motion.span>
           </a>
 
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => scrollTo(e, link.href)}
-                className={`nav-link ${activeSection === link.href ? 'active' : ''}`}
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Desktop nav with animated pill */}
+          <div className="hidden md:flex items-center gap-1 relative">
+            <div
+              className="flex items-center gap-1 relative rounded-full px-1 py-1"
+              style={{
+                background: 'rgba(var(--accent-rgb), 0.05)',
+                border: '1px solid var(--border)',
+              }}
+            >
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => scrollTo(e, link.href)}
+                  className="relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200 rounded-full"
+                  style={{
+                    color: activeSection === link.href ? 'white' : 'var(--text-secondary)',
+                  }}
+                >
+                  {activeSection === link.href && (
+                    <motion.div
+                      layoutId="activeNavPill"
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background: 'var(--accent)',
+                        boxShadow: '0 0 16px var(--accent-glow)',
+                      }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
+                </a>
+              ))}
+            </div>
 
             <motion.button
               onClick={toggleTheme}
               whileHover={{ scale: 1.1, rotate: 15 }}
               whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-colors ml-3"
               style={{
                 background: 'var(--accent-light)',
                 color: 'var(--accent)',
@@ -116,6 +140,7 @@ export default function Navbar() {
             </motion.button>
           </div>
 
+          {/* Mobile controls */}
           <div className="flex items-center gap-4 md:hidden">
             <motion.button
               onClick={toggleTheme}
@@ -188,7 +213,14 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={(e) => scrollTo(e, link.href)}
-                    className={`text-2xl font-semibold nav-link ${activeSection === link.href ? 'active' : ''}`}
+                    className={`text-2xl font-semibold transition-colors ${
+                      activeSection === link.href ? 'gradient-text' : ''
+                    }`}
+                    style={
+                      activeSection !== link.href
+                        ? { color: 'var(--text-secondary)' }
+                        : {}
+                    }
                   >
                     {link.label}
                   </a>
