@@ -1,41 +1,26 @@
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import SplitText from '@/components/effects/SplitText';
+import DecryptedText from '@/components/effects/DecryptedText';
+import StarBorder from '@/components/effects/StarBorder';
+import Particles from '@/components/effects/Particles';
 
 const roles = [
-  'Data Science Student',
-  'Robotics Enthusiast',
-  'AI Builder',
   'Full-Stack Developer',
+  'Machine Learning Engineer',
+  'Data Science Engineer',
+  'Software Developer',
 ];
 
-function useTypingEffect(words, typingSpeed = 100, deletingSpeed = 60, pauseTime = 2000) {
-  const [displayText, setDisplayText] = useState('');
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
+function useRotatingText(words, interval = 3000) {
+  const [index, setIndex] = useState(0);
   useEffect(() => {
-    const currentWord = words[wordIndex];
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        setDisplayText(currentWord.substring(0, displayText.length + 1));
-        if (displayText === currentWord) {
-          setTimeout(() => setIsDeleting(true), pauseTime);
-        }
-      } else {
-        setDisplayText(currentWord.substring(0, displayText.length - 1));
-        if (displayText === '') {
-          setIsDeleting(false);
-          setWordIndex((prev) => (prev + 1) % words.length);
-        }
-      }
-    }, isDeleting ? deletingSpeed : typingSpeed);
-
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseTime]);
-
-  return displayText;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, interval);
+    return () => clearInterval(timer);
+  }, [words, interval]);
+  return words[index];
 }
 
 const socialLinks = [
@@ -70,79 +55,106 @@ const socialLinks = [
 ];
 
 export default function HeroSection() {
-  const typedText = useTypingEffect(roles);
+  const currentRole = useRotatingText(roles, 3000);
+  const [roleKey, setRoleKey] = useState(0);
+
+  useEffect(() => {
+    setRoleKey((prev) => prev + 1);
+  }, [currentRole]);
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
-      <div className="blob blob-1" />
-      <div className="blob blob-2" />
-      <div className="blob blob-3" />
+    <section id="hero" className="relative min-h-[100svh] flex flex-col justify-start md:justify-center items-center text-center px-4 sm:px-6 pt-32 pb-24 md:pt-0 md:pb-0 overflow-hidden">
+      {/* Particle background */}
+      <div className="hero-particles-container">
+        <Particles
+          count={55}
+          speed={0.25}
+          connectDistance={130}
+          particleSize={1.8}
+        />
+      </div>
+
+      {/* Subtle blobs behind particles */}
+      <div className="blob blob-1" style={{ opacity: 0.3 }} />
+      <div className="blob blob-2" style={{ opacity: 0.25 }} />
+      <div className="blob blob-3" style={{ opacity: 0.2 }} />
 
       <div className="grid-bg" />
 
       <div className="relative z-10">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight"
-        >
-          Hi, I&apos;m{' '}
-          <span className="gradient-text">Souri Rishik</span>
-        </motion.h1>
+        {/* Main heading with SplitText */}
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
+          <SplitText text="Hi, I'm " delay={0.3} charDelay={0.04} duration={0.5} />
+          <span className="gradient-text">
+            <SplitText text="Souri Rishik" delay={0.7} charDelay={0.05} duration={0.5} />
+          </span>
+        </h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-xl sm:text-2xl font-medium mb-6 h-10"
-          style={{ color: 'var(--text-secondary)' }}
-        >
-          {typedText}
-          <span className="typing-cursor" />
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="max-w-2xl text-lg leading-relaxed mb-10 mx-auto"
-          style={{ color: 'var(--text-secondary)' }}
-        >
-          A coding enthusiast building intelligent systems — from autonomous robots
-          to AI-powered applications. Currently pursuing Data Science Engineering at MIT, Manipal.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          <a
-            href="#projects"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="btn-primary inline-block"
-          >
-            View Projects
-          </a>
-          <a
-            href="/SouriRishik_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline inline-block"
-          >
-            Download Resume
-          </a>
-        </motion.div>
-
+        {/* DecryptedText role subtitle */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
+          transition={{ duration: 0.3, delay: 1.2 }}
+          className="text-lg sm:text-xl md:text-2xl font-medium mb-6 h-10"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          <DecryptedText
+            key={roleKey}
+            text={currentRole}
+            speed={40}
+            delay={roleKey === 1 ? 1400 : 200}
+          />
+        </motion.div>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.6 }}
+          className="max-w-2xl text-base sm:text-lg leading-relaxed mb-10 mx-auto"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          I'm a Data Science Engineering student at MIT, Manipal, and a passionate software developer who thrives on bringing ideas to life through code. Driven by a deep curiosity for technology, I am constantly exploring new challenges to learn, grow, and build impactful solutions.
+        </motion.p>
+
+        {/* CTA buttons with StarBorder */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.8 }}
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full max-w-sm sm:max-w-none mx-auto mb-12 px-2 sm:px-0"
+        >
+          <StarBorder color="rgba(129, 140, 248, 0.6)" speed="5s" className="w-full sm:w-[220px]">
+            <a
+              href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="btn-primary w-full"
+              style={{ borderRadius: '12px' }}
+            >
+              View Projects
+            </a>
+          </StarBorder>
+          <StarBorder color="rgba(168, 85, 247, 0.5)" speed="7s" className="w-full sm:w-[220px]">
+            <a
+              href="/SouriRishik_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline w-full"
+              style={{ borderRadius: '12px' }}
+            >
+              Download Resume
+            </a>
+          </StarBorder>
+        </motion.div>
+
+        {/* Social links with glow effect */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 2.0 }}
           className="flex justify-center gap-5"
         >
           {socialLinks.map((social) => (
@@ -151,9 +163,9 @@ export default function HeroSection() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.15, y: -3 }}
+              whileHover={{ scale: 1.15, y: -4 }}
               whileTap={{ scale: 0.95 }}
-              className="w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+              className="social-link w-12 h-12 rounded-full flex items-center justify-center transition-all"
               style={{
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border)',
@@ -167,11 +179,12 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
+        transition={{ delay: 2.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-20"
         onClick={() => {
           document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
         }}
