@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeProvider>
-      <ClickSpark sparkColor="var(--accent)" sparkCount={8} sparkSize={12} duration={450}>
+      <ClickSpark sparkColor="var(--text-primary)" sparkCount={8} sparkSize={12} duration={450}>
         <AnimatePresence mode="wait">
           <motion.div
             key={router.pathname}

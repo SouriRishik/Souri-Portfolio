@@ -24,22 +24,20 @@ export default function ScrollToTop() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Scroll to top"
+          className="premium-glass group"
           style={{
             position: 'fixed',
             bottom: '2rem',
             right: '2rem',
             zIndex: 999,
-            width: '44px',
-            height: '44px',
+            width: '48px',
+            height: '48px',
             borderRadius: '50%',
-            border: '1px solid var(--border-hover)',
-            background: 'var(--accent)',
-            color: '#fff',
+            color: 'var(--text-primary)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: 'var(--shadow-glow)',
           }}
         >
           <svg

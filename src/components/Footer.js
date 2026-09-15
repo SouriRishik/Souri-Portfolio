@@ -1,9 +1,7 @@
-import { motion } from 'framer-motion';
-
 const footerLinks = [
   { label: 'Home', href: '#hero' },
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Background', href: '#about' },
+  { label: 'Selected Work', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -19,42 +17,29 @@ const scrollTo = (e, href) => {
 
 export default function Footer() {
   return (
-    <footer
-      className="relative mt-20 footer-gradient-border"
-      style={{
-        borderTop: '1px solid var(--border)',
-        background: 'var(--bg-secondary)',
-      }}
-    >
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-[5fr_1fr_1fr] gap-10">
-          <div className="text-center md:text-left">
-            <motion.h3
-              className="text-xl font-bold gradient-text mb-3"
-              whileHover={{ scale: 1.03 }}
-              style={{ display: 'inline-block' }}
-            >
-              &lt;/Souri&gt;
-            </motion.h3>
+    <footer className="w-full border-t border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-3xl pt-16 pb-8 mt-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          <div className="md:col-span-6 lg:col-span-5">
+            <h3 className="text-2xl font-display font-semibold mb-4 tracking-tight" style={{ color: 'var(--text-primary)' }}>
+              Souri Rishik
+            </h3>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              Data Science Engineering student passionate about building intelligent systems and solving real-world problems through code.
-              Enthusiastic about technology, creativity, and making a positive impact.
+              Data Science Engineering student passionate about building intelligent systems and solving real-world problems through code. Enthusiastic about technology, creativity, and making a positive impact.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 md:contents">
-          <div>
-            <h4 className="font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
-              Quick Links
+          <div className="md:col-span-3 lg:col-span-2 lg:col-start-9">
+            <h4 className="text-sm font-semibold mb-4 tracking-wide" style={{ color: 'var(--text-primary)' }}>
+              Navigation
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3 text-sm">
               {footerLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={(e) => scrollTo(e, link.href)}
-                    className="footer-link text-sm"
-                    style={{ color: 'var(--text-secondary)' }}
+                    className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:translate-x-1 inline-block transition-all duration-200"
                   >
                     {link.label}
                   </a>
@@ -63,18 +48,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
+          <div className="md:col-span-3 lg:col-span-2">
+            <h4 className="text-sm font-semibold mb-4 tracking-wide" style={{ color: 'var(--text-primary)' }}>
               Connect
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-3 text-sm">
               <li>
                 <a
                   href="https://github.com/SouriRishik"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link text-sm"
-                  style={{ color: 'var(--text-secondary)' }}
+                  className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:translate-x-1 inline-block transition-all duration-200"
                 >
                   GitHub
                 </a>
@@ -84,8 +68,7 @@ export default function Footer() {
                   href="https://linkedin.com/in/souri-rishik-02a188284"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link text-sm"
-                  style={{ color: 'var(--text-secondary)' }}
+                  className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:translate-x-1 inline-block transition-all duration-200"
                 >
                   LinkedIn
                 </a>
@@ -93,39 +76,26 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:souri.rishik27@gmail.com"
-                  className="footer-link text-sm"
-                  style={{ color: 'var(--text-secondary)' }}
+                  className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:translate-x-1 inline-block transition-all duration-200"
                 >
                   Email
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://instagram.com/souri.rishik"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-link text-sm"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  Instagram
-                </a>
-              </li>
             </ul>
-          </div>
           </div>
         </div>
 
-        <div
-          className="mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4"
-          style={{ borderTop: '1px solid var(--border)' }}
-        >
-          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+        <div className="pt-8 border-t border-[var(--glass-border)] flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
             &copy; {new Date().getFullYear()} Souri Rishik. All rights reserved.
           </p>
           <div className="flex items-center gap-2">
-            <span className="status-dot" />
-            <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
-              Open to collaborate
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
+              Available for opportunities
             </span>
           </div>
         </div>
