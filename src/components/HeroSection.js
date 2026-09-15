@@ -1,9 +1,6 @@
-import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import SplitText from '@/components/effects/SplitText';
+import { motion } from 'framer-motion';
 import DecryptedText from '@/components/effects/DecryptedText';
-import StarBorder from '@/components/effects/StarBorder';
-import Particles from '@/components/effects/Particles';
 
 const roles = [
   'Full-Stack Developer',
@@ -14,48 +11,19 @@ const roles = [
 
 function useRotatingText(words, interval = 3000) {
   const [index, setIndex] = useState(0);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
     }, interval);
     return () => clearInterval(timer);
   }, [words, interval]);
+  
   return words[index];
 }
 
-const socialLinks = [
-  {
-    label: 'GitHub',
-    href: 'https://github.com/SouriRishik',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/in/souri-rishik-02a188284',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Email',
-    href: 'mailto:souri.rishik27@gmail.com',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="4" width="20" height="16" rx="2" />
-        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-      </svg>
-    ),
-  },
-];
-
 export default function HeroSection() {
-  const currentRole = useRotatingText(roles, 3000);
+  const currentRole = useRotatingText(roles, 3500);
   const [roleKey, setRoleKey] = useState(0);
 
   useEffect(() => {
@@ -63,147 +31,109 @@ export default function HeroSection() {
   }, [currentRole]);
 
   return (
-    <section id="hero" className="relative min-h-[100svh] flex flex-col justify-start md:justify-center items-center text-center px-4 sm:px-6 pt-32 pb-24 md:pt-0 md:pb-0 overflow-hidden">
-      {/* Particle background */}
-      <div className="hero-particles-container">
-        <Particles
-          count={55}
-          speed={0.25}
-          connectDistance={130}
-          particleSize={1.8}
-        />
+    <section id="hero" className="relative min-h-[100svh] flex flex-col justify-center items-center px-6 pt-36 md:pt-24 pb-12 overflow-hidden">
+      
+      {/* Ambient Lighting Background */}
+      <div className="ambient-light-container">
+        <div className="ambient-light ambient-1"></div>
+        <div className="ambient-light ambient-2"></div>
       </div>
 
-      {/* Subtle blobs behind particles */}
-      <div className="blob blob-1" style={{ opacity: 0.3 }} />
-      <div className="blob blob-2" style={{ opacity: 0.25 }} />
-      <div className="blob blob-3" style={{ opacity: 0.2 }} />
-
-      <div className="grid-bg" />
-
-      <div className="relative z-10">
-        {/* Main heading with SplitText */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
-          <SplitText text="Hi, I'm " delay={0.3} charDelay={0.04} duration={0.5} />
-          <span className="gradient-text">
-            <SplitText text="Souri Rishik" delay={0.7} charDelay={0.05} duration={0.5} />
-          </span>
-        </h1>
-
-        {/* DecryptedText role subtitle */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 lg:gap-16">
+        
+        {/* LEFT COLUMN: Big Square Image */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: 1.2 }}
-          className="text-lg sm:text-xl md:text-2xl font-medium mb-6 h-10"
-          style={{ color: 'var(--text-secondary)' }}
+          initial={{ opacity: 0, x: -30, scale: 0.95 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="w-full md:w-1/2 lg:w-5/12 max-w-md flex-shrink-0"
         >
-          <DecryptedText
-            key={roleKey}
-            text={currentRole}
-            speed={40}
-            delay={roleKey === 1 ? 1400 : 200}
-          />
+          <div className="w-full aspect-square rounded-[32px] overflow-hidden p-2 bg-[var(--glass-bg)] border border-[var(--glass-border)] backdrop-blur-2xl shadow-[var(--glass-shadow)] hover:scale-[1.02] transition-transform duration-500">
+            <div className="w-full h-full rounded-[24px] overflow-hidden">
+              <img 
+                src="/images/linkedin_photo.jpeg" 
+                alt="Souri Rishik" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </motion.div>
 
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.6 }}
-          className="max-w-2xl text-base sm:text-lg leading-relaxed mb-10 mx-auto"
-          style={{ color: 'var(--text-secondary)' }}
-        >
-          I'm a Data Science Engineering student at MIT, Manipal, and a passionate software developer who thrives on bringing ideas to life through code. Driven by a deep curiosity for technology, I am constantly exploring new challenges to learn, grow, and build impactful solutions.
-        </motion.p>
+        {/* RIGHT COLUMN: Text Content */}
+        <div className="w-full md:w-1/2 lg:w-7/12 flex flex-col justify-center text-left">
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          >
+            <p className="font-mono text-xs sm:text-sm tracking-widest uppercase mb-4" style={{ color: 'var(--text-secondary)' }}>
+              Software Engineering • ML • Data Science
+            </p>
+          </motion.div>
 
-        {/* CTA buttons with StarBorder */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.8 }}
-          className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full max-w-sm sm:max-w-none mx-auto mb-12 px-2 sm:px-0"
-        >
-          <StarBorder color="rgba(129, 140, 248, 0.6)" speed="5s" className="w-full sm:w-[220px]">
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold tracking-tighter leading-none mb-6 whitespace-nowrap -ml-1 sm:-ml-2"
+          >
+            Souri <span className="gradient-text">Rishik</span>
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="h-8 sm:h-10 mb-6 text-xl sm:text-2xl font-medium"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            <DecryptedText
+              key={roleKey}
+              text={currentRole}
+              speed={40}
+              delay={200}
+            />
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-base sm:text-lg mb-10 max-w-lg leading-relaxed text-justify"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            I'm a Data Science & Engineering student at MIT, Manipal. I architect scalable software and train intelligent machine learning models, transforming raw data into high-performance applications.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 1 }}
+            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+          >
             <a
               href="#projects"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="btn-primary w-full"
-              style={{ borderRadius: '12px' }}
+              className="apple-btn-primary w-full sm:w-auto"
             >
               View Projects
             </a>
-          </StarBorder>
-          <StarBorder color="rgba(168, 85, 247, 0.5)" speed="7s" className="w-full sm:w-[220px]">
             <a
               href="/SouriRishik_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline w-full"
-              style={{ borderRadius: '12px' }}
+              className="apple-btn-secondary w-full sm:w-auto"
             >
               Download Resume
             </a>
-          </StarBorder>
-        </motion.div>
+          </motion.div>
+        </div>
 
-        {/* Social links with glow effect */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 2.0 }}
-          className="flex justify-center gap-5"
-        >
-          {socialLinks.map((social) => (
-            <motion.a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.15, y: -4 }}
-              whileTap={{ scale: 0.95 }}
-              className="social-link w-12 h-12 rounded-full flex items-center justify-center transition-all"
-              style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-secondary)',
-              }}
-              aria-label={social.label}
-            >
-              {social.icon}
-            </motion.a>
-          ))}
-        </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-20"
-        onClick={() => {
-          document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-        }}
-        title="Scroll to About"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 rounded-full flex justify-center pt-2"
-          style={{ border: '2px solid var(--border)' }}
-        >
-          <motion.div
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ background: 'var(--accent)' }}
-          />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
