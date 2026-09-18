@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import Footer from '@/components/Footer';
@@ -84,21 +84,31 @@ const experiences = [
     role: 'Software Developer Intern',
     org: 'CodeLogs Technologies LLP',
     duration: 'May 2026 — Jul 2026',
-    detail: 'Deployed an AWS serverless pipeline (S3, SQS, Lambda) and a Spring Boot Stripe backend for metered billing. Developed a React/Spring Boot admin portal automating 27,000+ products categorization and internal HR workflows.',
+    details: [
+      'Deployed an AWS serverless pipeline (S3, SQS, Lambda) and a Spring Boot Stripe backend for metered billing.',
+      'Developed a React/Spring Boot admin portal automating 27,000+ products categorization and internal HR workflows.'
+    ],
     logo: '/logos/codelogs.jpeg',
   },
   {
     role: 'Coding Subsystem Head',
     org: 'Robomanipal',
     duration: 'Sep 2025 — Present',
-    detail: 'Enhanced the official Robomanipal website with 100%+ traffic growth and 98/100 Real Experience Score. Represented MIT MAHE at Technoxian 8.0 (quarterfinals). Secured 2nd Runner-Up at Robonautica, IISc Bangalore.',
+    details: [
+      'Enhanced the official Robomanipal website with 100%+ traffic growth and 98/100 Real Experience Score.',
+      'Represented MIT MAHE at Technoxian 8.0 (quarterfinals).',
+      'Secured 2nd Runner-Up at Robonautica, IISc Bangalore.'
+    ],
     logo: '/logos/robomanipal.jpeg',
   },
   {
     role: 'Research Intern',
     org: 'Manipal Institute of Technology',
     duration: 'Jun 2025 — Jul 2025',
-    detail: 'Engineered ML models (Gradient Boosting, CatBoost, XGBoost, Random Forest) to detect phishing URLs with 97.4% accuracy and 97.7% F1-score on 30,000+ samples. Deployed a Python-based web app.',
+    details: [
+      'Engineered ML models (Gradient Boosting, CatBoost, XGBoost, Random Forest) to detect phishing URLs with 97.4% accuracy and 97.7% F1-score on 30,000+ samples.',
+      'Deployed a Python-based web app.'
+    ],
     logo: '/logos/mit-manipal.jpeg',
   },
 ];
@@ -162,6 +172,75 @@ const projects = [
     github: 'https://github.com/SouriRishik/LineFollower_Technoxian',
   },
 ];
+
+const ExperienceItem = ({ exp }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="flex gap-5 items-start">
+      <div className="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-white p-1 shadow-sm mt-1">
+        <img src={exp.logo} alt={exp.org} className="w-full h-full object-contain rounded-xl" />
+      </div>
+      <div className="flex-1 group">
+        <div 
+          className="flex justify-between items-start cursor-pointer md:cursor-auto" 
+          onClick={() => {
+            if (window.innerWidth < 768) setIsOpen(!isOpen);
+          }}
+        >
+          <div>
+            <h4 className="font-display font-medium text-lg leading-tight mb-1 transition-colors">{exp.role}</h4>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <span style={{ color: 'var(--text-secondary)' }} className="text-sm">{exp.org}</span>
+              <span className="text-xs font-medium px-2 py-1 rounded-full" style={{ background: 'var(--glass-border)' }}>
+                {exp.duration}
+              </span>
+            </div>
+          </div>
+          <motion.div 
+            animate={{ rotate: isOpen ? 180 : 0 }} 
+            className="mt-1 shrink-0 md:hidden"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </motion.div>
+        </div>
+        
+        {/* Mobile Animated Dropdown */}
+        <div className="md:hidden">
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <ul className="list-disc list-outside ml-4 mt-3 space-y-2 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  {exp.details.map((point, idx) => (
+                    <li key={idx} className="pl-1">{point}</li>
+                  ))}
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Desktop Static List */}
+        <div className="hidden md:block">
+          <ul className="list-disc list-outside ml-4 mt-1 space-y-2 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            {exp.details.map((point, idx) => (
+              <li key={idx} className="pl-1">{point}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -241,21 +320,7 @@ export default function Home() {
               <h3 className="font-display text-2xl font-semibold mb-8">Experience</h3>
               <div className="space-y-8">
                 {experiences.map((exp, i) => (
-                  <div key={i} className="flex gap-5 items-start">
-                    <div className="w-12 h-12 rounded-2xl overflow-hidden shrink-0 bg-white p-1 shadow-sm">
-                      <img src={exp.logo} alt={exp.org} className="w-full h-full object-contain rounded-xl" />
-                    </div>
-                    <div>
-                      <h4 className="font-display font-medium text-lg leading-tight mb-1">{exp.role}</h4>
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        <span style={{ color: 'var(--text-secondary)' }} className="text-sm">{exp.org}</span>
-                        <span className="text-xs font-medium px-2 py-1 rounded-full" style={{ background: 'var(--glass-border)' }}>
-                          {exp.duration}
-                        </span>
-                      </div>
-                      <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{exp.detail}</p>
-                    </div>
-                  </div>
+                  <ExperienceItem key={i} exp={exp} />
                 ))}
               </div>
             </div>

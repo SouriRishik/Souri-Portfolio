@@ -19,17 +19,17 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-3xl pt-16 pb-8 mt-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          <div className="md:col-span-6 lg:col-span-5">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          <div className="col-span-2 md:col-span-6 lg:col-span-5 text-center md:text-left">
             <h3 className="text-2xl font-display font-semibold mb-4 tracking-tight" style={{ color: 'var(--text-primary)' }}>
               Souri Rishik
             </h3>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-sm leading-relaxed max-w-md mx-auto md:mx-0" style={{ color: 'var(--text-secondary)' }}>
               Data Science Engineering student passionate about building intelligent systems and solving real-world problems through code. Enthusiastic about technology, creativity, and making a positive impact.
             </p>
           </div>
 
-          <div className="md:col-span-3 lg:col-span-2 lg:col-start-9">
+          <div className="col-span-1 md:col-span-3 lg:col-span-2 lg:col-start-9">
             <h4 className="text-sm font-semibold mb-4 tracking-wide" style={{ color: 'var(--text-primary)' }}>
               Navigation
             </h4>
@@ -48,7 +48,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-3 lg:col-span-2">
+          <div className="col-span-1 md:col-span-3 lg:col-span-2">
             <h4 className="text-sm font-semibold mb-4 tracking-wide" style={{ color: 'var(--text-primary)' }}>
               Connect
             </h4>

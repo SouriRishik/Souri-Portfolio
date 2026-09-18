@@ -6,29 +6,26 @@ import { useRouter } from "next/router";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import ScrollToTop from "@/components/ScrollToTop";
 import MouseGlow from "@/components/MouseGlow";
-import ClickSpark from "@/components/effects/ClickSpark";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   return (
     <ThemeProvider>
-      <ClickSpark sparkColor="var(--text-primary)" sparkCount={8} sparkSize={12} duration={450}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={router.pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Component {...pageProps} />
-            <SpeedInsights />
-            <MouseGlow />
-            <ScrollToTop />
-          </motion.div>
-        </AnimatePresence>
-      </ClickSpark>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={router.pathname}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Component {...pageProps} />
+          <SpeedInsights />
+          <MouseGlow />
+          <ScrollToTop />
+        </motion.div>
+      </AnimatePresence>
     </ThemeProvider>
   );
 }

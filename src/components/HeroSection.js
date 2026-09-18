@@ -60,7 +60,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* RIGHT COLUMN: Text Content */}
-        <div className="w-full md:w-1/2 lg:w-7/12 flex flex-col justify-center text-left">
+        <div className="w-full md:w-1/2 lg:w-7/12 flex flex-col justify-center items-center md:items-start text-center md:text-left">
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold tracking-tighter leading-none mb-6 whitespace-nowrap -ml-1 sm:-ml-2"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold tracking-tighter leading-none mb-6 whitespace-nowrap -ml-0 sm:-ml-2"
           >
             Souri <span className="gradient-text">Rishik</span>
           </motion.h1>
@@ -100,7 +100,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-base sm:text-lg mb-10 max-w-lg leading-relaxed text-justify"
+            className="text-base sm:text-lg mb-10 max-w-lg leading-relaxed"
             style={{ color: 'var(--text-secondary)' }}
           >
             I'm a Data Science & Engineering student at MIT, Manipal. I architect scalable software and train intelligent machine learning models, transforming raw data into high-performance applications.
@@ -110,7 +110,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 1 }}
-            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row justify-center md:justify-start gap-4 w-full sm:w-auto"
           >
             <a
               href="#projects"
